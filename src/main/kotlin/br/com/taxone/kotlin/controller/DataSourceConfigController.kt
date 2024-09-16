@@ -174,11 +174,11 @@ class DataSourceConfigController {
 			var userId = 1
 			if (dsTableTemporary.containsKey(userId)){
 				var dstList = dsTableTemporary.get(userId) as MutableList<DSTableDTO>
-				if (dstList == null) {
-					dstList = mutableListOf<DSTableDTO>()
-					dsTableTemporary.put(userId, dstList)
-				}
 				dstList.add(dstDTO)
+			}else{
+				var dstList = mutableListOf<DSTableDTO>()
+				dstList.add(dstDTO)
+				dsTableTemporary.put(userId, dstList)
 			}
 			dsColumnsTemporary.put(pseudoId, dsCList)
 		}
