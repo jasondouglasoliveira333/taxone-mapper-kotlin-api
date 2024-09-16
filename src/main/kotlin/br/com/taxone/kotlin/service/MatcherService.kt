@@ -27,7 +27,7 @@ import br.com.taxone.kotlin.repository.DSColumnRepository
 import br.com.taxone.kotlin.repository.DSTableRepository
 import br.com.taxone.kotlin.repository.SAFXColumnRepository
 import br.com.taxone.kotlin.repository.SAFXTableRepository
-//import br.com.taxone.kotlin.util.DatabaseHelper
+import br.com.taxone.kotlin.util.DatabaseHelper
 //import br.com.taxone.kotlin.util.FTPHelper
 //import br.com.taxone.kotlin.util.FileHelper
 //import br.com.taxone.kotlin.util.StringUtil
@@ -79,17 +79,17 @@ public class MatcherService {
 		sfResponse.totalPages = dcPage.totalPages
 		return sfResponse
 	}
-//
-//	fun getDSTables(): List<DSTableDTO> {
-//		var dsTables = dsTableRepository.findAll()
-//		var dsTablesDTO = mutableListOf<DSTableDTO>()
-//		for (dsTable in dsTables){
-//			var dsTableDTO = DSTableConverter.convert(dsTable)
-//			dsTablesDTO.add(dsTableDTO)
-//		}
-//		return dsTablesDTO
-//	}
-//
+
+	fun getDSTables(): List<DSTableDTO> {
+		var dsTables = dsTableRepository.findAll()
+		var dsTablesDTO = mutableListOf<DSTableDTO>()
+		for (dsTable in dsTables){
+			var dsTableDTO = DSTableConverter.convert(dsTable)
+			dsTablesDTO.add(dsTableDTO)
+		}
+		return dsTablesDTO
+	}
+
 //	fun updateSAFXColumns(safxColumns: List<SAFXColumnUpdateDTO>) {
 //		for (safxColumn in safxColumns){
 //			safxColumnRepository.updateSAFXColumn(safxColumn.id as Int, safxColumn.dsColumnId as Int)
@@ -100,16 +100,16 @@ public class MatcherService {
 //		safxTableRepository.updateDSTable(id, dsTableId)
 //	}
 //
-//	fun getDSMetadata(dataSourceDTO: DataSourceDTO): List<DSColumnDTO>{
-//		var dsList = null
-////		if (dataSourceDTO.dataSourceType.equals(DataSourceType.Database)) {
-////			dsList = DatabaseHelper.getTableMetadata(dataSourceDTO)
-////		}else if (dataSourceDTO.getDataSourceType().equals(DataSourceType.TXT)) {
-////			dsList = FileHelper.getFileMetadata(dataSourceDTO)
-////		}else {
-////			dsList = FTPHelper.getFileMetadata(dataSourceDTO)
-////		}
-//		return dsList as List<DSColumnDTO>
-//	}
+	fun getDSMetadata(dataSourceDTO: DataSourceDTO): List<DSColumnDTO>{
+		var dsList: List<DSColumnDTO>? = null
+		if (dataSourceDTO.dataSourceType?.equals(DataSourceType.Database) as Boolean) {
+			dsList = DatabaseHelper.getTableMetadata(dataSourceDTO)
+//		}else if (dataSourceDTO.getDataSourceType().equals(DataSourceType.TXT)) {
+//			dsList = FileHelper.getFileMetadata(dataSourceDTO)
+//		}else {
+//			dsList = FTPHelper.getFileMetadata(dataSourceDTO)
+		}
+		return dsList as List<DSColumnDTO>
+	}
 
 }

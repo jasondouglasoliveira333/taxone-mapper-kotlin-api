@@ -1,7 +1,5 @@
 package br.com.taxone.kotlin.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +33,7 @@ public class DSTableController {
 	@GetMapping
 	fun list(): ResponseEntity<Any> {
 		try {
-			var dsTables = mutableListOf<DSTableDTO>() // matcherService.getDSTables();
+			var dsTables = matcherService.getDSTables();
 			return ResponseEntity.ok().body(dsTables);
 		}catch (e: Exception) {
 			log.error("Error obtendo a definicao da tabela", e);
@@ -45,12 +43,11 @@ public class DSTableController {
 	
 			
 	@GetMapping("{id}/dsColumns")
-	fun listDSColumns(@PathVariable("id") id: Integer, 
+	fun listDSColumns(@PathVariable("id") id: Int, 
 			@RequestParam(name="page", defaultValue = "0") page: Int, 
 			@RequestParam(name="size", defaultValue = "10") size: Int): ResponseEntity<Any> {
 		try {
-//			PageResponse<DSColumnDTO> dsColumns = matcherService.getDSColumns(id, PageRequest.of(page, size));
-			var dsColumns = PageResponse<DSColumnDTO>();
+			var dsColumns = matcherService.getDSColumns(id, PageRequest.of(page, size));
 			return ResponseEntity.ok().body(dsColumns);
 		}catch (e: Exception) {
 			log.error("Error obtendo a definicao da tabela", e);

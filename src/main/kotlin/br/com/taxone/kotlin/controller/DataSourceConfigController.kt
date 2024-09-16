@@ -91,21 +91,24 @@ class DataSourceConfigController {
 			@RequestParam(name="page", defaultValue = "0") page: Int, 
 			@RequestParam(name="size", defaultValue = "10") size: Int): ResponseEntity<Any> {
 		try {
-//			var dsCPage = null as PageResponse<DSColumnDTO>
-//			List<DSColumnDTO> dscList = dsColumnsTemporary.get(dsTableId)
-//			if (dscList != null) {
-//				dsCPage = new PageResponse<>()
-//				int lastIdx = page * size + size
-//				if (lastIdx > dscList.size()) {
-//					lastIdx = dscList.size()  
+			var dsCPage: PageResponse<DSColumnDTO>? = null
+			if (dsColumnsTemporary.containsKey(dsTableId)){
+				var dscList = dsColumnsTemporary.get(dsTableId) as List<DSColumnDTO>
+//				if (dscList != null) {
+					dsCPage = PageResponse<DSColumnDTO>()
+					var lastIdx = page * size + size
+					if (lastIdx > dscList.size) {
+						lastIdx = dscList.size  
+					}
+					
+					dsCPage.content = dscList.subList(page * size, lastIdx).toMutableList()// as 
+					var totalPages = dscList.size / size + 0 //(dscList.size % size == 0 ? 0 : 1)
+					System.out.println("totalPages:" + totalPages)
+					dsCPage.totalPages = totalPages
 //				}
-//				dsCPage.setContent(dscList.subList(page * size, lastIdx))
-//				int totalPages = dscList.size() / size + (dscList.size() % size == 0 ? 0 : 1)
-//				System.out.println("totalPages:" + totalPages)
-//				dsCPage.setTotalPages(totalPages)
-//			}else {
-				var dsCPage = matcherService.getDSColumns(dsTableId, PageRequest.of(page, size))
-//			}
+			}else {
+				dsCPage = matcherService.getDSColumns(dsTableId, PageRequest.of(page, size))
+			}
 			return ResponseEntity.ok().body(dsCPage)
 		}catch (e: Exception) {
 			log.error("Error obtendo a definicao das colunas da tabela do data source", e)
@@ -118,7 +121,7 @@ class DataSourceConfigController {
 		ResponseEntity<Any> {
 		try {
 			dataSourceDTO.dataSourceType = DataSourceType.valueOf(dataSourceType)
-			var dsList = mutableListOf<DSColumnDTO>()//matcherService.getDSMetadata(dataSourceDTO)
+			var dsList = matcherService.getDSMetadata(dataSourceDTO)
 			System.out.println("dsListMetadata.size:" + dsList.size)
 			clearUserTableAndColumns()
 			loadTableAndColumns(dataSourceDTO.resourceNames as String, dsList)
@@ -156,7 +159,7 @@ class DataSourceConfigController {
 
 	fun loadTableAndColumns(tableNames: String, dsList: List<DSColumnDTO>) {
 //		POCUser user = (POCUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()
-		var tables = Arrays.asList(tableNames.split(","))
+		var tables = tableNames.split(",").toMutableList()
 		for (tableName in tables) {
 			var dsCList = mutableListOf<DSColumnDTO>()
 			for (dsColumn in dsList){
@@ -164,17 +167,19 @@ class DataSourceConfigController {
 					dsCList.add(dsColumn)
 				}
 			}
-			var pseudoId = (Math.random() * 100000)
+			var pseudoId = (Math.random() * 100000).toInt()
 			var dstDTO = DSTableDTO()
 			dstDTO.id = pseudoId as Int
 			dstDTO.name = tableName as String
 			var userId = 1
-			var dstList = dsTableTemporary.get(userId) as MutableList<DSTableDTO>
-			if (dstList == null) {
-				dstList = mutableListOf<DSTableDTO>()
-				dsTableTemporary.put(userId, dstList)
+			if (dsTableTemporary.containsKey(userId)){
+				var dstList = dsTableTemporary.get(userId) as MutableList<DSTableDTO>
+				if (dstList == null) {
+					dstList = mutableListOf<DSTableDTO>()
+					dsTableTemporary.put(userId, dstList)
+				}
+				dstList.add(dstDTO)
 			}
-			dstList.add(dstDTO)
 			dsColumnsTemporary.put(pseudoId, dsCList)
 		}
 

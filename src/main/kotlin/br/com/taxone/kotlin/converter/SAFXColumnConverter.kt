@@ -33,8 +33,8 @@ public class SAFXColumnConverter {
 			cDTO.name = safxcolumn.name
 			var safxTableDTO = SAFXTableDTO()
 			var safxTable = safxcolumn.safxTable
-//			safxTableDTO.id = safxTable.id
-//			safxTableDTO.name = safxTable.name
+			safxTableDTO.id = safxTable?.id
+			safxTableDTO.name = safxTable?.name
 			cDTO.safxTable = safxTableDTO
 			return cDTO;
 		}
