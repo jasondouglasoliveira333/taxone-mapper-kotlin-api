@@ -23,7 +23,7 @@ import br.com.taxone.kotlin.service.UploadService
 @CrossOrigin
 @RestController
 @RequestMapping("uploads")
-public class UploadController {
+class UploadController {
 	
 	var log = LoggerFactory.getLogger("UploadController.class")
 	
