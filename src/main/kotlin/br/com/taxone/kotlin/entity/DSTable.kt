@@ -1,12 +1,12 @@
-package br.com.taxone.kotlin.entity;
+package br.com.taxone.kotlin.entity
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
 
-import lombok.Data;
+import lombok.Data
 
 @Data
 @Entity

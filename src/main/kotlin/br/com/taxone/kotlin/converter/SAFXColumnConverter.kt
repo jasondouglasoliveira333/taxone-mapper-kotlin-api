@@ -1,10 +1,10 @@
-package br.com.taxone.kotlin.converter;
+package br.com.taxone.kotlin.converter
 
-import br.com.taxone.kotlin.dto.SAFXColumnDTO;
-import br.com.taxone.kotlin.dto.SAFXTableDTO;
-import br.com.taxone.kotlin.entity.DSColumn;
-import br.com.taxone.kotlin.entity.SAFXColumn;
-import br.com.taxone.kotlin.entity.SAFXTable;
+import br.com.taxone.kotlin.dto.SAFXColumnDTO
+import br.com.taxone.kotlin.dto.SAFXTableDTO
+import br.com.taxone.kotlin.entity.DSColumn
+import br.com.taxone.kotlin.entity.SAFXColumn
+import br.com.taxone.kotlin.entity.SAFXTable
 
 public class SAFXColumnConverter {
 
@@ -24,7 +24,7 @@ public class SAFXColumnConverter {
 				cDTO.dsColumnId = dsColumn.id
 				cDTO.dsColumnName = dsColumn.name
 			}
-			return cDTO;
+			return cDTO
 		}
 	
 		fun convertCriteria(safxcolumn: SAFXColumn): SAFXColumnDTO {
@@ -36,13 +36,13 @@ public class SAFXColumnConverter {
 			safxTableDTO.id = safxTable?.id
 			safxTableDTO.name = safxTable?.name
 			cDTO.safxTable = safxTableDTO
-			return cDTO;
+			return cDTO
 		}
 		
 		fun convert(safxcolumn: SAFXColumnDTO): SAFXColumn {
 			var c = SAFXColumn()
 			c.id = safxcolumn.id
-			return c; 
+			return c 
 		}
 	
 	}

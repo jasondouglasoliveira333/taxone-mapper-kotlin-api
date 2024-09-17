@@ -1,7 +1,7 @@
-package br.com.taxone.kotlin.dto;
+package br.com.taxone.kotlin.dto
 
-import br.com.taxone.kotlin.enums.ColumnType;
-import lombok.Data;
+import br.com.taxone.kotlin.enums.ColumnType
+import lombok.Data
 
 @Data
 public class DSColumnDTO {

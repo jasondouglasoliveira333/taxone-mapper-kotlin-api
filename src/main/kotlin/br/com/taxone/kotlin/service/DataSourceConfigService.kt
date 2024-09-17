@@ -1,23 +1,23 @@
-package br.com.taxone.kotlin.service;
+package br.com.taxone.kotlin.service
 
-import java.util.stream.Collectors;
+import java.util.stream.Collectors
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
-import br.com.taxone.kotlin.converter.DSColumnConverter;
-import br.com.taxone.kotlin.converter.DSTableConverter;
-import br.com.taxone.kotlin.converter.DataSourceConfigConverter;
-import br.com.taxone.kotlin.dto.DSColumnDTO;
-import br.com.taxone.kotlin.dto.DSTableDTO;
-import br.com.taxone.kotlin.dto.DataSourceDTO;
-import br.com.taxone.kotlin.entity.DSColumn;
-import br.com.taxone.kotlin.entity.DSTable;
-import br.com.taxone.kotlin.entity.DataSourceConfiguration;
-import br.com.taxone.kotlin.enums.DataSourceType;
-import br.com.taxone.kotlin.repository.DSColumnRepository;
-import br.com.taxone.kotlin.repository.DSTableRepository;
-import br.com.taxone.kotlin.repository.DataSourceConfigRepository;
+import br.com.taxone.kotlin.converter.DSColumnConverter
+import br.com.taxone.kotlin.converter.DSTableConverter
+import br.com.taxone.kotlin.converter.DataSourceConfigConverter
+import br.com.taxone.kotlin.dto.DSColumnDTO
+import br.com.taxone.kotlin.dto.DSTableDTO
+import br.com.taxone.kotlin.dto.DataSourceDTO
+import br.com.taxone.kotlin.entity.DSColumn
+import br.com.taxone.kotlin.entity.DSTable
+import br.com.taxone.kotlin.entity.DataSourceConfiguration
+import br.com.taxone.kotlin.enums.DataSourceType
+import br.com.taxone.kotlin.repository.DSColumnRepository
+import br.com.taxone.kotlin.repository.DSTableRepository
+import br.com.taxone.kotlin.repository.DataSourceConfigRepository
 
 @Service
 public class DataSourceConfigService {
@@ -38,7 +38,7 @@ public class DataSourceConfigService {
 			var dataSourceDTO = DataSourceConfigConverter.convert(dataSource)
 			dataSourceDTOList.add(dataSourceDTO)
 		}
-		return dataSourceDTOList;
+		return dataSourceDTOList
 	}
 
 	fun get(dataSourceType: String): DataSourceDTO  {
@@ -72,18 +72,18 @@ public class DataSourceConfigService {
 			dst = DSTable()
 			dst.dataSourceConfiguration = dataSourceConfigRepository.getOne(dataSourceConfigId)
 			dst.name = dsTable.name
-			dsTableRepository.save(dst);
+			dsTableRepository.save(dst)
 		}
 		
 		for (dsColumnDTO in dsColumnsList)  {
 			var dsc = dsColumnRepository.findFirstBydsTableIdAndName(dst.id as Int, dsColumnDTO.name as String)
 			if (dsc == null) {
-				dsc = DSColumnConverter.converter(dsColumnDTO);
+				dsc = DSColumnConverter.converter(dsColumnDTO)
 				dsc.dsTable = dst
 			}else {
-				DSColumnConverter.marge(dsColumnDTO, dsc);
+				DSColumnConverter.marge(dsColumnDTO, dsc)
 			}
-			dsColumnRepository.save(dsc);
+			dsColumnRepository.save(dsc)
 		}
 	}
 

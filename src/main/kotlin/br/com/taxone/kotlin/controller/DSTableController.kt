@@ -1,22 +1,22 @@
-package br.com.taxone.kotlin.controller;
+package br.com.taxone.kotlin.controller
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 
-import br.com.taxone.kotlin.dto.DSColumnDTO;
-import br.com.taxone.kotlin.dto.DSTableDTO;
-import br.com.taxone.kotlin.dto.PageResponse;
-import br.com.taxone.kotlin.service.MatcherService;
-import lombok.extern.slf4j.Slf4j;
+import br.com.taxone.kotlin.dto.DSColumnDTO
+import br.com.taxone.kotlin.dto.DSTableDTO
+import br.com.taxone.kotlin.dto.PageResponse
+import br.com.taxone.kotlin.service.MatcherService
+import lombok.extern.slf4j.Slf4j
 
 @Slf4j
 @CrossOrigin
@@ -33,11 +33,11 @@ public class DSTableController {
 	@GetMapping
 	fun list(): ResponseEntity<Any> {
 		try {
-			var dsTables = matcherService.getDSTables();
-			return ResponseEntity.ok().body(dsTables);
+			var dsTables = matcherService.getDSTables()
+			return ResponseEntity.ok().body(dsTables)
 		}catch (e: Exception) {
-			log.error("Error obtendo a definicao da tabela", e);
-			return ResponseEntity.badRequest().build();
+			log.error("Error obtendo a definicao da tabela", e)
+			return ResponseEntity.badRequest().build()
 		}
 	}
 	
@@ -47,11 +47,11 @@ public class DSTableController {
 			@RequestParam(name="page", defaultValue = "0") page: Int, 
 			@RequestParam(name="size", defaultValue = "10") size: Int): ResponseEntity<Any> {
 		try {
-			var dsColumns = matcherService.getDSColumns(id, PageRequest.of(page, size));
-			return ResponseEntity.ok().body(dsColumns);
+			var dsColumns = matcherService.getDSColumns(id, PageRequest.of(page, size))
+			return ResponseEntity.ok().body(dsColumns)
 		}catch (e: Exception) {
-			log.error("Error obtendo a definicao da tabela", e);
-			return ResponseEntity.badRequest().build();
+			log.error("Error obtendo a definicao da tabela", e)
+			return ResponseEntity.badRequest().build()
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package br.com.taxone.kotlin.dto;
+package br.com.taxone.kotlin.dto
 
 import java.time.LocalDateTime
 

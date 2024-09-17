@@ -1,4 +1,4 @@
-package br.com.taxone.kotlin.enums;
+package br.com.taxone.kotlin.enums
 
 enum class ColumnType {
 	NUMERIC,

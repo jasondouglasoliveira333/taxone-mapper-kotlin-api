@@ -8,7 +8,7 @@ public class DSColumnConverter {
 	
 	companion object {
 		fun convert(dsColumn: DSColumn): DSColumnDTO  {
-			var dDTO = DSColumnDTO();
+			var dDTO = DSColumnDTO()
 			dDTO.id = dsColumn.id
 			dDTO.name = dsColumn.name
 			dDTO.columnType = dsColumn.columnType
@@ -22,7 +22,7 @@ public class DSColumnConverter {
 			dsc.name = dsd.name
 			dsc.columnType = dsd.columnType
 			dsc.size = dsd.size
-			return dsc;
+			return dsc
 		}
 	
 		fun marge(dsd: DSColumnDTO, dsc: DSColumn) {

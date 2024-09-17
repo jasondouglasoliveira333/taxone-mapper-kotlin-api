@@ -55,7 +55,7 @@ class EmailController {
 			}
 			return ResponseEntity.ok().build()
 		}catch (e : Exception) {
-			log.error("Erro salvando o email", e);
+			log.error("Erro salvando o email", e)
 			return ResponseEntity.badRequest().build()
 		}
 	}
@@ -66,7 +66,7 @@ class EmailController {
 			emailService.delete(emailId)
 			return ResponseEntity.ok().build()
 		}catch (e : Exception) {
-			log.error("Erro delete o email", e);
+			log.error("Erro delete o email", e)
 			return ResponseEntity.badRequest().build()
 		}
 	}

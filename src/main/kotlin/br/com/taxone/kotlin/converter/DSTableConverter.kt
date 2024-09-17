@@ -1,7 +1,7 @@
-package br.com.taxone.kotlin.converter;
+package br.com.taxone.kotlin.converter
 
-import br.com.taxone.kotlin.dto.DSTableDTO;
-import br.com.taxone.kotlin.entity.DSTable;
+import br.com.taxone.kotlin.dto.DSTableDTO
+import br.com.taxone.kotlin.entity.DSTable
 
 public class DSTableConverter {
 

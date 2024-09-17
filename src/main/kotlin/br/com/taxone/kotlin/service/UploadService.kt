@@ -60,16 +60,16 @@ open class UploadService {
 	}
 
 	open fun findAll(page: PageRequest): PageResponse<UploadDTO>  {
-		var uPage = uploadReponsitory.findAll(page);
-//		System.out.println("uPage:" + uPage.getTotalElements());
-		var upResponse = PageResponse<UploadDTO>();
+		var uPage = uploadReponsitory.findAll(page)
+//		System.out.println("uPage:" + uPage.getTotalElements())
+		var upResponse = PageResponse<UploadDTO>()
 		var uploads = mutableListOf<UploadDTO>()
 		for (u in uPage.getContent()){
 			var uDTO = UploadConverter.convert(u)
 			uploads.add(uDTO)
 		}
-		upResponse.content = uploads //(.stream().map().collect(Collectors.toList()));
+		upResponse.content = uploads //(.stream().map().collect(Collectors.toList()))
 		upResponse.totalPages = uPage.totalPages
-		return upResponse;
+		return upResponse
 	}
 }

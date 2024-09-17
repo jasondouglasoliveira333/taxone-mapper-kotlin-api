@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.Table
 
-import br.com.taxone.kotlin.enums.EmailType;
+import br.com.taxone.kotlin.enums.EmailType
 
 @Entity
 @Table(name = "email")

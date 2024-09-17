@@ -2,10 +2,12 @@ package br.com.taxone.kotlin.converter
 
 import java.util.stream.Collectors
 
+import br.com.taxone.kotlin.dto.SAFXColumnDTO
 import br.com.taxone.kotlin.dto.SAFXTableDTO
-//import br.com.taxone.kotlin.dto.SAFXTableDetailtDTO
+import br.com.taxone.kotlin.dto.SAFXTableDetailtDTO
 import br.com.taxone.kotlin.entity.DSTable
 import br.com.taxone.kotlin.entity.SAFXTable
+import br.com.taxone.kotlin.entity.SAFXColumn
 
 public class SAFXTableConverter {
 
@@ -24,13 +26,18 @@ public class SAFXTableConverter {
 			return tDTO
 		}
 	
-//		fun convertWithColumns(safxTable: SAFXTable): SAFXTableDetailtDTO {
-//			var tDTO = SAFXTableDetailtDTO()
-//			tDTO.id(safxTable.Id())
-//			tDTO.name(safxTable.Name())
-//			tDTO.SafxColumns(safxTable.SafxColumns().stream().map(SAFXColumnConverter::convert).collect(Collectors.toList()))
-//			return tDTO
-//		}
+		fun convertWithColumns(safxTable: SAFXTable): SAFXTableDetailtDTO {
+			var tDTO = SAFXTableDetailtDTO()
+			tDTO.id = safxTable.id
+			tDTO.name = safxTable.name
+			var safxColumnsDTOList = mutableListOf<SAFXColumnDTO>()
+			for (safxColumn in safxTable.safxColumns as List<SAFXColumn>){
+				var safxTDTO = SAFXColumnConverter.convert(safxColumn)
+				safxColumnsDTOList.add(safxTDTO)
+			}
+			tDTO.safxColumns = safxColumnsDTOList
+			return tDTO
+		}
 	
 		fun convertIdName(safxTable: SAFXTable): SAFXTableDTO {
 			var tDTO = SAFXTableDTO()

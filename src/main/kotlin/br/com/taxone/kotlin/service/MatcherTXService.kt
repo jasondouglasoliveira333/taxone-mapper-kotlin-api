@@ -1,6 +1,6 @@
-package br.com.taxone.kotlin.service;
+package br.com.taxone.kotlin.service
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service
 import org.springframework.beans.factory.annotation.Autowired
 import br.com.taxone.kotlin.dto.SAFXColumnUpdateDTO
 import br.com.taxone.kotlin.repository.SAFXTableRepository

@@ -1,6 +1,6 @@
 package br.com.taxone.kotlin.dto
 
-import lombok.Data;
+import lombok.Data
 
 class SAFXTableDetailtDTO {
 	var id: Int? = null

@@ -1,6 +1,6 @@
-package br.com.taxone.kotlin.dto;
+package br.com.taxone.kotlin.dto
 
-import lombok.Data;
+import lombok.Data
 
 @Data
 class DSTableDTO {

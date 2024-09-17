@@ -1,14 +1,14 @@
-package br.com.taxone.kotlin.entity;
+package br.com.taxone.kotlin.entity
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.ManyToOne
 
-import br.com.taxone.kotlin.enums.ColumnType;
-import lombok.Data;
+import br.com.taxone.kotlin.enums.ColumnType
+import lombok.Data
 
 @Data
 @Entity

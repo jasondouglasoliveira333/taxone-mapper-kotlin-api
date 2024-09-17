@@ -1,11 +1,11 @@
-package br.com.taxone.kotlin.repository;
+package br.com.taxone.kotlin.repository
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
 
-import br.com.taxone.kotlin.entity.DSColumn;
+import br.com.taxone.kotlin.entity.DSColumn
 
 @Repository
 public interface DSColumnRepository: JpaRepository<DSColumn, Int>{
