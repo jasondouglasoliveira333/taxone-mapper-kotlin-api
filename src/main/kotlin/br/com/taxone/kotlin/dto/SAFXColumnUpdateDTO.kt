@@ -1,7 +1,7 @@
-package br.com.taxone.kotlin.dto;
+package br.com.taxone.kotlin.dto
 
-import br.com.taxone.kotlin.enums.ColumnType;
-import lombok.Data;
+import br.com.taxone.kotlin.enums.ColumnType
+import lombok.Data
 
 @Data
 class SAFXColumnUpdateDTO {
@@ -14,6 +14,6 @@ class SAFXColumnUpdateDTO {
 	var size: Int? = null
 	
 	var dsColumnId: Int? = null
-	var dsColumnName: Int? = null
+	var dsColumnName: String? = null
 	
 }

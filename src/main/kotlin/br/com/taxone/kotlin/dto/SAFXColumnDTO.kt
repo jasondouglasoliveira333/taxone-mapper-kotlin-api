@@ -4,7 +4,7 @@ import br.com.taxone.kotlin.enums.ColumnType;
 import lombok.Data;
 
 @Data
-public class SAFXColumnDTO {
+class SAFXColumnDTO {
 
 	var id: Int? = null
 	var name: String? = null

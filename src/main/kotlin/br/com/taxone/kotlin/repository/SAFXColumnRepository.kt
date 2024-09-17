@@ -1,7 +1,5 @@
 package br.com.taxone.kotlin.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,7 +15,7 @@ public interface SAFXColumnRepository: JpaRepository<SAFXColumn, Int>{
 
 	@Modifying
 	@Query("update SAFXColumn s set s.dsColumn.id = :dsColumnId where s.id = :id")
-	fun updateSAFXColumn(@Param("id") id: Int, @Param("dsColumnId") dsColumnId: Int);
+	fun updateSAFXColumn(@Param("id") id: Int, @Param("dsColumnId") dsColumnId: Int?);
 
 	fun findFirstBysafxTableIdAndName(id: Int, name: String ): SAFXColumn 
 

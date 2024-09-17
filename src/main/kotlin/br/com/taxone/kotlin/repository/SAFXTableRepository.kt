@@ -16,7 +16,7 @@ public interface SAFXTableRepository: JpaRepository<SAFXTable, Int>{
 	fun findByName(tableName: String): SAFXTable 
 
 	@Query("select s from SAFXTable s where (s.name like :name or :name is null) and (:justAssociated = true and dsTable is not null or :justAssociated = false)") 
-	fun findByNameAndAssociated(@Param("name") name: String, @Param("justAssociated") justAssociated: Boolean, page: Pageable): Page<SAFXTable> 
+	fun findByNameAndAssociated(@Param("name") name: String?, @Param("justAssociated") justAssociated: Boolean, page: Pageable): Page<SAFXTable> 
 
 	@Modifying
 	@Query("update SAFXTable s set s.dsTable.id = :dsTableId where s.id = :id")

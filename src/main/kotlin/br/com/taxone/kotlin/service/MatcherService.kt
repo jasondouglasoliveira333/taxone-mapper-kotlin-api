@@ -30,7 +30,7 @@ import br.com.taxone.kotlin.repository.SAFXTableRepository
 import br.com.taxone.kotlin.util.DatabaseHelper
 //import br.com.taxone.kotlin.util.FTPHelper
 //import br.com.taxone.kotlin.util.FileHelper
-//import br.com.taxone.kotlin.util.StringUtil
+import br.com.taxone.kotlin.util.StringUtil
 
 @Service
 public class MatcherService {
@@ -47,25 +47,35 @@ public class MatcherService {
 	@Autowired
 	lateinit private var dsColumnRepository: DSColumnRepository
 
-//	fun findAllSafx(String name, Boolean justAssociated, PageRequest page): PageResponse<SAFXTableDTO> {
-//		Page<SAFXTable> safxPage = safxTableRepository.findByNameAndAssociated(StringUtil.putPercent(name), justAssociated, page)
-//		PageResponse<SAFXTableDTO> sfResponse = new PageResponse<>()
-//		System.out.println("safxPage.getContent().size:" + safxPage.getContent().size())
-//		sfResponse.setContent(safxPage.getContent().stream().map(SAFXTableConverter::convert).collect(Collectors.toList())) 
-//		sfResponse.setTotalPages(safxPage.getTotalPages())
-//		return sfResponse
-//	}
-//
-//	fun SAFXTableDTO getSAFXTable(Integer id) {
-//		return SAFXTableConverter.convert(safxTableRepository.getOne(id))
-//	}
-//
-//	fun List<SAFXColumnDTO> getSAFXColumns(Integer id, Boolean associated) {
-//		List<SAFXColumn> scList = safxColumnRepository.findBysafxTableId(id)
-//		return scList.stream().filter(sc -> associated ? sc.getDsColumn() != null : true).
-//				map(SAFXColumnConverter::convert).collect(Collectors.toList())
-//	}
-//
+	fun findAllSafx(name: String?, justAssociated: Boolean, page: PageRequest): PageResponse<SAFXTableDTO> {
+		var safxPage = safxTableRepository.findByNameAndAssociated(StringUtil.putPercent(name), justAssociated, page)
+		var sfResponse = PageResponse<SAFXTableDTO>()
+//		System.out.println("safxPage.getContent().size:" + safxPage.getContent().size)
+		var safxTableList = mutableListOf<SAFXTableDTO>()
+		for (safxTable in safxPage.getContent()){
+			var safxTableDTO = SAFXTableConverter.convert(safxTable)
+			safxTableList.add(safxTableDTO)
+		}
+		sfResponse.content = safxTableList 
+		sfResponse.totalPages = safxPage.totalPages
+		return sfResponse
+	}
+
+	fun getSAFXTable(id: Int): SAFXTableDTO {
+		return SAFXTableConverter.convert(safxTableRepository.getOne(id))
+	}
+
+	fun getSAFXColumns(id: Int, associated: Boolean): List<SAFXColumnDTO> {
+		var scList = safxColumnRepository.findBysafxTableId(id)
+		var scFitered =	 scList.filter{sc -> if (associated) if (sc.dsColumn != null) true else false else true}
+		var safxDTOList = mutableListOf<SAFXColumnDTO>()
+		for (safxColumn in scFitered){
+			var safxCDTO = SAFXColumnConverter.convert(safxColumn)
+			safxDTOList.add(safxCDTO)
+		}
+		return safxDTOList
+	}
+
 	fun getDSColumns(id: Int, page: Pageable): PageResponse<DSColumnDTO> {
 		var dcPage = dsColumnRepository.findBydsTableId(id, page)
 		var sfResponse = PageResponse<DSColumnDTO>()
@@ -74,8 +84,7 @@ public class MatcherService {
 			var dsColumDTO = DSColumnConverter.convert(dsColumn)
 			dsColumns.add(dsColumDTO)
 		}
-//			.stream().map(DSColumnConverter::convert
-		sfResponse.content = dsColumns//().collect(Collectors.toList())) 
+		sfResponse.content = dsColumns 
 		sfResponse.totalPages = dcPage.totalPages
 		return sfResponse
 	}
@@ -90,16 +99,6 @@ public class MatcherService {
 		return dsTablesDTO
 	}
 
-//	fun updateSAFXColumns(safxColumns: List<SAFXColumnUpdateDTO>) {
-//		for (safxColumn in safxColumns){
-//			safxColumnRepository.updateSAFXColumn(safxColumn.id as Int, safxColumn.dsColumnId as Int)
-//		}
-//	}
-//
-//	fun updateSAFXTable(id: Int, dsTableId: Int) {
-//		safxTableRepository.updateDSTable(id, dsTableId)
-//	}
-//
 	fun getDSMetadata(dataSourceDTO: DataSourceDTO): List<DSColumnDTO>{
 		var dsList: List<DSColumnDTO>? = null
 		if (dataSourceDTO.dataSourceType?.equals(DataSourceType.Database) as Boolean) {
