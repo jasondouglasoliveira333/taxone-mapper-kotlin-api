@@ -7,6 +7,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 import br.com.taxone.kotlin.dto.Customer
 import br.com.taxone.kotlin.dto.ErrorResponse
+import java.nio.file.Files
+import kotlin.io.NoSuchFileException
+import java.io.File
+import br.com.taxone.kotlin.dto.CustomerJava
 
 
 @SpringBootApplication
@@ -18,12 +22,5 @@ open public class TaxoneApplication {
 
 fun main(args: Array<String>){
 	println("OUR other test")
-//	var c = ErrorResponse(1, "WE")
-//	println(c.code.toString() + " - " + c.message)
-//	c = ErrorResponse(33)//, "WE"
-//	println(c.code.toString() + " - " + c.message)
-//	c = ErrorResponse()//, "WE" //33
-//	println(c.code.toString() + " - " + c.message)
-
 	runApplication<TaxoneApplication>(*args)
-}
+}	
